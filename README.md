@@ -1,4 +1,4 @@
-# TALLER-TS-1
+# TALLERES-SW
 ## Juan Ortega
 ## 202113442
 ### En este repositorio subire todos mis talleres del curso
