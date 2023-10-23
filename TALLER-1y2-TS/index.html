@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>TV Series</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            background-color: #00AAB8;
+            color: #000;
+            text-align: left;
+            padding: 1em 0;
+            border-bottom: 2px solid #3498db;
+            margin-bottom: 10px;
+            padding-left: 20px;
+        }
+
+        .container {
+            display: flex;
+            max-width: 1000px;
+            margin: 0;
+            padding: 20px;
+        }
+
+        #table-container {
+            flex: 1;
+        }
+
+        #detail-container {
+            flex: 1;
+            padding: 0 20px;
+        }
+
+        table {
+            width: 100%;
+            max-width: 800px;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        .average-row {
+            font-weight: bold;
+        }
+
+        tbody {
+            background-color: #EEEEEE;
+        }
+
+        td:first-child {
+            font-weight: bold;
+        }
+
+        .card {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1 style="margin: 0;">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/8/84/Black_TV-PG_icon.png" alt="Icono" style="vertical-align: middle; height: 40px; width: 40px; margin-right: 10px;">
+            TV Series
+        </h1>
+    </div>
+    <div class="container">
+        <div id="table-container"></div>
+        <div id="detail-container"></div>
+    </div>
+
+    <script>
+        class Serie {
+            constructor(id, name, channel, seasons, description, link, image) {
+                this.id = id;
+                this.name = name;
+                this.channel = channel;
+                this.seasons = seasons;
+                this.description = description;
+                this.link = link;
+                this.image = image;
+            }
+        }
+
+        const series = [
+            new Serie(
+                1,
+                'Breaking Bad',
+                'AMC',
+                5,
+                'El profesor calmado de química de una secundaria, Walter White cree que su vida no puede ser peor. Su salario apenas le alcanza para sostener a su familia, una situación que no mejora cuando su esposa da a luz y su hijo adolescente sufre de parálisis cerebral, pero Walter queda anonadado cuando se entera que tiene un cáncer terminal. Al concluir que su enfermedad iba a arruinar financieramente a su familia, él toma una decisión desesperada con el fin de ganar más dinero durante el tiempo que le queda y transforma un viejo vehículo de recreación en un laboratorio de matanfetaminas sobre ruedas.',
+                'https://www.amc.com/shows/breaking-bad',
+                'https://www.concierto.cl/wp-content/uploads/2017/03/Breaking-Bad-768x480.jpg'
+            ),
+            new Serie(
+                2,
+                'Orange Is the New Black',
+                'Netflix',
+                6,
+                'Piper Chapman pasa un año en una cárcel de mujeres como resultado de sus negocios con el tráfico de drogas.',
+                'https://www.netflix.com/co/title/70242311',
+                'https://resizing.flixster.com/huv0-X9ceKQ5FGNpM1xul9l5TQY=/206x305/v2/https://resizing.flixster.com/Zrxh1nr2Gx-Gw8XULjA1jI4_pI4=/ems.cHJkLWVtcy1hc3NldHMvdHZzZWFzb24vUlRUVjIwMjAyOC53ZWJw'
+            ),
+            new Serie(
+                3,
+                'Game of Thrones',
+                'HBO',
+                7,
+                'El libro mejor vendido de la serie "A Song of Ice and Fire" escrito por George R.R, es llevado a la pantalla chica cuando HBO decide recrear esta historia épica de fantasía. Es la descripción de dos familias poderosas, reyes y reinas, caballeros y renegados, hombres falsos y honestos, haciendo parte de un juego mortal por el control de los Siete Reinados de Westeros y por sentarse en el trono más alto. Martin es el co productor ejecutivo y uno de los escritores de la serie que fue filmada en el Norte de Irlanda y Malta.',
+                'https://www.hbo.com/game-of-thrones',
+                'https://www.infobae.com/new-resizer/qMogv6uhjfDaEOmFPz0qmbw_IwI=/992x558/filters:format(webp):quality(85)/s3.amazonaws.com/arc-wordpress-client-uploads/infobae-wp/wp-content/uploads/2019/03/13155011/A-un-mes-de-Game-Of-Thrones-como-estan-las-historias-Series.jpg'
+            ),
+            new Serie(
+                4,
+                'The Big Bang Theory',
+                'CBS',
+                12,
+                'Leonard y Sheldon son dos cerebros privilegiados que pueden ser capaces de decirle a todo el mundo más de lo que quiere saber sobre la física cuántica, pero que no tienen ni la menor idea de cómo relacionarse socialmente, sobre todo cuando se trata de mujeres. Sin embargo, la llegada de una nueva vecina llamada Penny al edificio altera la vida sentimental de Leonard y las obsesiones de Sheldon.',
+                'https://www.cbs.com/shows/big_bang_theory/about/',
+                'https://i0.wp.com/www.sopitas.com/wp-content/uploads/2015/11/The-Big-Bang-Theory1.jpg'
+            ),
+            new Serie(
+                5,
+                'Sherlock',
+                'BBC',
+                4,
+                'En esta versión contemporánea sobre las historias del detective Sir Arthur Conan Doyle. El Dr. John Watson es un veterano de la guerra de Afganistán y conoce al brillante, Holmes cuando Holmes coloca un aviso buscando un compañero de apartamento.',
+                'https://www.bbc.co.uk/programmes/b018ttws',
+                'https://images.hola.com/imagenes/actualidad/20200504166912/sherlock-serie-benedict-cumberbatch/0-817-766/sherlock3-t.jpg?tx=w_1200'
+            ),
+            new Serie(
+                6,
+                'A Very English Scandal',
+                'BBC',
+                2,
+                'Cuando el examante Norman Scott pone en peligro su carrera política, Jeremy Thorpe intenta borrar todo rastro de su relación. Pronto se da cuenta de que para silenciar su vieja llama solo hay un camino.',
+                'https://www.bbc.co.uk/programmes/p065smy4',
+                'https://resizing.flixster.com/IkL4tjmy85sdsuHZWEy7Apu9Sw8=/206x305/v2/https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p15526450_b_v10_ah.jpg'
+            ),
+        ];
+
+        const tableContainer = document.getElementById('table-container');
+        const detailContainer = document.getElementById('detail-container');
+
+        if (!tableContainer) {
+            console.error("Table container not found.");
+        } else {
+            const table = document.createElement('table');
+            const header = table.createTHead();
+            const headerRow = header.insertRow(0);
+            const headers = ['#', 'Name', 'Channel', 'Seasons'];
+            for (let i = 0; i < headers.length; i++) {
+                const cell = headerRow.insertCell(i);
+                cell.innerHTML = `<b>${headers[i]}</b>`;
+            }
+
+            const body = table.createTBody();
+            let totalSeasons = 0;
+
+            series.forEach((serie) => {
+                const bodyRow = body.insertRow();
+                bodyRow.addEventListener('click', () => {
+                    showDetail(serie);
+                });
+
+                const nameCell = bodyRow.insertCell(0);
+                nameCell.innerHTML = serie.id.toString();
+                bodyRow.insertCell(1).innerHTML = `<span style="color: blue; cursor: pointer;">${serie.name}</span>`;
+                bodyRow.insertCell(2).innerHTML = serie.channel;
+                bodyRow.insertCell(3).innerHTML = serie.seasons.toString();
+                totalSeasons += serie.seasons;
+            });
+
+            const averageSeasons = (totalSeasons / series.length).toFixed(2);
+            const row = body.insertRow();
+            row.classList.add('average-row');
+            row.insertCell(0).innerHTML = '';
+            row.insertCell(1).innerHTML = '';
+            row.insertCell(2).innerHTML = 'Average Seasons:';
+            row.insertCell(3).innerHTML = averageSeasons.toString();
+
+            tableContainer.appendChild(table);
+        }
+
+        function showDetail(serie) {
+            const detail = `
+                <div class="card" style="width: 18rem;">
+                    <img src="${serie.image}" class="card-img-top" alt="${serie.name}">
+                    <div class="card-body">
+                        <h5 class="card-title" style="color: blue;"><b>${serie.name}</b></h5>
+                        <p class="card-text">${serie.description}</p>
+                        <a href="${serie.link}" class="btn btn-primary" target="_blank">Go to ${serie.name}</a>
+                    </div>
+                </div>
+            `;
+
+            detailContainer.innerHTML = detail;
+        }
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
